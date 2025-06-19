@@ -1,0 +1,9 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "lint": { },
+    "build": { },
+    "test":  { },
+    "dev":   { "cache": false }   // dev servers shouldn’t be cached
+  }
+}
