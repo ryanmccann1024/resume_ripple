@@ -1,0 +1,10 @@
+{
+  // tsconfig.json ─ satisfies ESLint, nothing else
+  "compilerOptions": {
+    "rootDir": ".", // keep TS happy if you ever compile here
+    "composite": true, // lets other tsconfigs reference this one
+    "skipLibCheck": true // faster ESLint runs; no type-checking libs
+  },
+  /* No files are actually compiled – include is empty on purpose */
+  "include": []
+}
