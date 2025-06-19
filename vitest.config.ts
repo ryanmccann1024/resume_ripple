@@ -1,43 +1,54 @@
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  // defaults for all projects
   test: {
     globals: true,
     coverage: {
-      reporter: ['text', 'html'],
       provider: 'v8',
+      reporter: ['text', 'html'],
+      exclude: ['dist/**', '**/*.stories.*'],
     },
   },
-  // tell Vitest each workspace is its own “project”
+
+  // one project per workspace
   projects: [
     {
+      // core-logic ─────────────────────────────────────────
+      root: 'packages/core-logic',
       test: {
         name: 'core-logic',
         environment: 'node',
-        include: ['packages/core-logic/src/**/*.test.{ts,tsx}'],
+        include: ['src/**/*.test.{ts,tsx}'],
       },
     },
     {
+      // prompts ────────────────────────────────────────────
+      root: 'packages/prompts',
       test: {
         name: 'prompts',
         environment: 'node',
-        include: ['packages/prompts/src/**/*.test.{ts,tsx}'],
+        include: ['src/**/*.test.{ts,tsx}'],
       },
     },
     {
+      // ui-kit (browser) ───────────────────────────────────
+      root: 'packages/ui-kit',
       test: {
         name: 'ui-kit',
         environment: 'jsdom',
-        setupFiles: ['packages/ui-kit/test/setup.ts'],
-        include: ['packages/ui-kit/src/**/*.test.{ts,tsx}'],
+        setupFiles: ['test/setup.ts'],
+        include: ['src/**/*.test.{ts,tsx}'],
       },
     },
     {
+      // web (browser) ──────────────────────────────────────
+      root: 'apps/web',
       test: {
         name: 'web',
         environment: 'jsdom',
-        setupFiles: ['apps/web/test/setup.ts'],
-        include: ['apps/web/src/**/*.test.{ts,tsx}'],
+        setupFiles: ['test/setup.ts'],
+        include: ['src/**/*.test.{ts,tsx}'],
       },
     },
   ],
