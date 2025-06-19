@@ -1,0 +1,72 @@
+###############################################################################
+#  Node / Package managers
+###############################################################################
+node_modules/
+.pnpm/
+.yarn/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+*.log                                  # catch any stray log files
+*.tsbuildinfo                          # TypeScript incremental cache
+
+###############################################################################
+#  Turborepo & other build caches
+###############################################################################
+.turbo/
+.turborepo/
+.cache/
+.eslintcache
+
+###############################################################################
+#  Build / output folders
+###############################################################################
+dist/
+dist-ssr/
+build/
+out/                                   # Next.js static export
+coverage/                              # Jest, Vitest, nyc, istanbul
+.storybook-static/                     # Storybook build
+.cypress/                              # Cypress cache
+
+###############################################################################
+#  Environment & config
+###############################################################################
+.env*
+!.env.example                          # keep a sample env if present
+*.local                                # vite.config.local.js, *.local.ts, etc.
+
+###############################################################################
+#  Editors / IDEs
+###############################################################################
+.vscode/
+!.vscode/extensions.json               # share recommended extensions
+.idea/
+*.sw?                                  # Vim swap files
+*.suo *.ntvs* *.njsproj *.sln          # VS / VS Code misc
+
+###############################################################################
+#  OS & tooling cruft
+###############################################################################
+.DS_Store                              # macOS Finder
+Thumbs.db                              # Windows
+*.orig                                 # merge conflict leftovers
+
+###############################################################################
+#  Misc frameworks
+###############################################################################
+.next/                                 # Next.js build
+.vercel/                               # Vercel output
+.storybook/                            # Storybook temp
+playwright-report/
+
+###############################################################################
+#  Optional: lock-files from other managers you **don’t** use
+###############################################################################
+# yarn.lock
+# pnpm-lock.yaml
+###############################################################################
+# End of file
+###############################################################################

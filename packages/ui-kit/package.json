@@ -1,0 +1,16 @@
+{
+  "name": "@resume-ai/ui-kit",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings=0",
+    "dev": "echo 'no dev script yet'",
+    "build": "echo 'tbd'",
+    "test": "echo 'tbd'"
+  },
+  "devDependencies": {
+    "typescript": "5.3"
+  }
+}
