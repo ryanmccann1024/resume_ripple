@@ -1,0 +1,39 @@
+{
+  "name": "resume_ripple",
+  "private": true,
+  "version": "1.0.0",
+  "description": "- One-liner describing the purpose and uniqueness of the app   - Mention AI enhancement and client-side privacy",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanmccann1024/resume_ripple.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ryanmccann1024/resume_ripple/issues"
+  },
+  "homepage": "https://github.com/ryanmccann1024/resume_ripple#readme",
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  }
+}
