@@ -1,25 +1,16 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-
-  // Tell Turborepo which package-manager & version you’re on
-  "packageManager": "npm@11.4.1",
-
   "tasks": {
-    // ───────────────────────────────────── build
     "build": {
-      "dependsOn": ["^build"], // build all deps first
-      "outputs": ["dist/**"] // cache dist folder
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
-
-    // ───────────────────────────────────── lint
     "lint": {
-      "outputs": [] // no outputs, just caching the result
+      "outputs": []
     },
-
-    // ───────────────────────────────────── test
     "test": {
-      "dependsOn": ["build"], // make sure sources are built
-      "outputs": [] // vitest doesn’t emit build artefacts
+      "dependsOn": ["build"],
+      "outputs": []
     }
   }
 }
