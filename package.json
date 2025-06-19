@@ -17,7 +17,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "test": "turbo run test",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "storybook": "npm run --workspace=@resume-ai/ui-kit storybook",
+    "build-storybook": "npm run --workspace=@resume-ai/ui-kit build-storybook"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

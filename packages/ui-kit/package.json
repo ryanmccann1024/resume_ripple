@@ -8,9 +8,22 @@
     "lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings=0",
     "dev": "echo 'no dev script yet'",
     "build": "tsup src/index.ts --dts --format esm,cjs",
-    "test": "echo 'tbd'"
+    "test": "echo 'tbd'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "typescript": "5.3"
+    "@chromatic-com/storybook": "^4.0.0",
+    "@storybook/addon-a11y": "^9.0.12",
+    "@storybook/addon-docs": "^9.0.12",
+    "@storybook/addon-onboarding": "^9.0.12",
+    "@storybook/addon-vitest": "^9.0.12",
+    "@storybook/react-vite": "^9.0.12",
+    "eslint-plugin-storybook": "^9.0.12",
+    "storybook": "^9.0.12",
+    "typescript": "5.3",
+    "@vitest/browser": "^3.2.4",
+    "playwright": "^1.53.1",
+    "@vitest/coverage-v8": "^3.2.4"
   }
 }
