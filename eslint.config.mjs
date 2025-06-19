@@ -16,6 +16,7 @@ export default [
             'apps/*/test/**/*.{ts,tsx}',
             'packages/*/test/**/*.{ts,tsx}',
         ],
+        env: { browser: true, node: true },
         languageOptions: {
             parser: tseslint.parser,
             parserOptions: {
