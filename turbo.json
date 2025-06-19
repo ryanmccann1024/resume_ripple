@@ -3,7 +3,23 @@
   "tasks": {
     "lint": {},
     "build": {},
-    "test": {},
+    "test": {
+      "$schema": "https://turborepo.org/schema.json",
+      "pipeline": {
+        "build": {
+          "dependsOn": ["^build"],
+          "outputs": ["dist/**"]
+        },
+        "lint": { "outputs": [] },
+        "test": {
+          "command": "vitest run",
+          "dependsOn": ["^test"],
+          "outputs": [],
+          "cache": true,
+          "outputLogs": "full"
+        }
+      }
+    },
     "dev": {
       "cache": false
     }

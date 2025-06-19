@@ -1,7 +1,17 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "noEmit": true // no JS output, faster
-  },
-  "include": ["apps/*/src/**/*", "packages/*/src/**/*", "*.js", "*.ts", "*.tsx"]
+  "include": [
+    /* source code */
+    "apps/*/src/**/*",
+    "packages/*/src/**/*",
+
+    /* tests */
+    "apps/*/test/**/*",
+    "packages/*/test/**/*",
+
+    /* root-level configs (Vitest, ESLint, etc.) */
+    "*.config.{js,ts,cjs,mjs}",
+    "vitest.config.ts"
+  ],
+  "exclude": ["node_modules", "dist", "coverage"]
 }
