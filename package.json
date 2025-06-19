@@ -12,7 +12,8 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "prepare": "husky install",
-    "lint": "turbo run lint --cache-dir=.turbo",
+    "lint": "eslint --max-warnings=0 .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "test": "turbo run test"
   },
@@ -43,13 +44,13 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "turbo": "^2.5.4",
-    "typescript": "^5.8.3"
+    "typescript": "5.3"
   }
 }
