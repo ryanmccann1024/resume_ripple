@@ -1,10 +1,19 @@
 {
   // tsconfig.json ─ satisfies ESLint, nothing else
   "compilerOptions": {
-    "rootDir": ".", // keep TS happy if you ever compile here
-    "composite": true, // lets other tsconfigs reference this one
-    "skipLibCheck": true // faster ESLint runs; no type-checking libs
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true, // <-- we *do* want d.ts
+    "declarationMap": true,
+    "outDir": "dist"
   },
-  /* No files are actually compiled – include is empty on purpose */
-  "include": []
+
+  "include": ["packages/**/*", "apps/**/*"],
+  "exclude": ["**/dist", "node_modules"]
 }

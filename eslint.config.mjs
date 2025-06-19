@@ -1,61 +1,57 @@
-// eslint.config.mjs – flat-config style --------------------------------------
+import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
+import react from 'eslint-plugin-react';
+import prettier from 'eslint-config-prettier';
 
+/** @type {import('eslint').FlatConfig[]} */
 export default [
-    /* ------------------------------------------------- *
-     * 0. Ignore everything we never want to lint
-     * ------------------------------------------------- */
-    {
-        ignores: [
-            /** tooling & vendor */
-            'node_modules',
-            '.husky',
-            '.turbo',
-            /** build output */
-            'dist',
-            'apps/*/dist',
-            'packages/*/dist'
-        ]
-    },
+    /* ── Base JS rules ─────────────────────────────────────────────── */
+    js.configs.recommended,
 
-    /* ------------------------------------------------- *
-     * 1. TypeScript / TSX source
-     * ------------------------------------------------- */
+    /* ── Type-checked TS / TSX in src & test folders ──────────────── */
     {
-        files: ['**/*.ts', '**/*.tsx'],
+        files: [
+            'apps/*/src/**/*.{ts,tsx}',
+            'packages/*/src/**/*.{ts,tsx}',
+            'apps/*/test/**/*.{ts,tsx}',
+            'packages/*/test/**/*.{ts,tsx}',
+        ],
         languageOptions: {
             parser: tseslint.parser,
             parserOptions: {
-                project: ['./tsconfig.eslint.json'],   // <── the new file
+                project: ['./tsconfig.eslint.json'],
                 tsconfigRootDir: import.meta.dirname,
-                sourceType: 'module',
-                ecmaVersion: 'latest'
-            }
+            },
         },
-        plugins: {
-            '@typescript-eslint': tseslint.plugin,
-            react: reactPlugin,
-            'react-hooks': reactHooks
-        },
-        settings: {react: {version: 'detect'}},
-
+        plugins: { '@typescript-eslint': tseslint.plugin },
         rules: {
-            /* example rules – tweak to taste */
-            'react/jsx-no-target-blank': 'error',
-            '@typescript-eslint/consistent-type-imports': 'warn'
-        }
+            ...tseslint.configs.recommendedTypeChecked.rules,
+        },
     },
 
-    /* ------------------------------------------------- *
-     * 2. Plain JavaScript / config files
-     * ------------------------------------------------- */
+    /* ── React tweaks ──────────────────────────────────────────────── */
     {
-        files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
-        languageOptions: {ecmaVersion: 'latest', sourceType: 'module'},
+        plugins: { react },
+        settings: { react: { version: 'detect' } },
         rules: {
-            // generic JS rules go here
-        }
-    }
+            'react/jsx-uses-react': 'off',       // React 17+
+            'react/react-in-jsx-scope': 'off',   // React 17+
+        },
+    },
+
+    /* ── Config / build files – parsed as untyped JS/TS ───────────── */
+    {
+        files: [
+            '**/*.config.{js,ts,mjs,cjs}', // vite.config.ts, tsup.config.ts, etc.
+            'vitest.config.ts',
+            'tailwind.config.js',
+            'eslint.config.*',
+        ],
+        languageOptions: {
+            parserOptions: { project: null }, // ⬅ disable typed-linting
+        },
+    },
+
+    /* ── Prettier (always last) ───────────────────────────────────── */
+    prettier,
 ];
