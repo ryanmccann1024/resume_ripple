@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true // no JS output, faster
+  },
+  "include": ["apps/*/src/**/*", "packages/*/src/**/*", "*.js", "*.ts", "*.tsx"]
+}
