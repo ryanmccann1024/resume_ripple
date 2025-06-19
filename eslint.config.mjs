@@ -1,58 +1,70 @@
+// eslint.config.mjs
 import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 import react from 'eslint-plugin-react';
-import prettier from 'eslint-config-prettier';
+import reactHooks from 'eslint-plugin-react-hooks';
+import unusedImports from 'eslint-plugin-unused-imports';
+import globals from 'globals';
 
-/** @type {import('eslint').FlatConfig[]} */
+/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-    /* ── Base JS rules ─────────────────────────────────────────────── */
+    /* 1️⃣  Base ESLint recommended rules */
     js.configs.recommended,
 
-    /* ── Type-checked TS / TSX in src & test folders ──────────────── */
+    /* 2️⃣  Our project-wide rules (JS + TS + React) */
     {
-        files: [
-            'apps/*/src/**/*.{ts,tsx}',
-            'packages/*/src/**/*.{ts,tsx}',
-            'apps/*/test/**/*.{ts,tsx}',
-            'packages/*/test/**/*.{ts,tsx}',
-        ],
-        env: { browser: true, node: true },
+        /* match every source / test file we care about */
+        files: ['**/*.{js,jsx,ts,tsx}'],
+
+        /* ── language / parsing ---------------------------------------------- */
         languageOptions: {
-            parser: tseslint.parser,
+            parser: tsParser,
             parserOptions: {
                 project: ['./tsconfig.eslint.json'],
-                tsconfigRootDir: import.meta.dirname,
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+            },
+            /* browser + node globals instead of the old “env” key */
+            globals: {
+                ...globals.browser,
+                ...globals.node,
             },
         },
-        plugins: { '@typescript-eslint': tseslint.plugin },
+
+        /* ── plugin registrations -------------------------------------------- */
+        plugins: {
+            '@typescript-eslint': tsPlugin,
+            react,
+            'react-hooks': reactHooks,
+            'unused-imports': unusedImports,
+        },
+
+        /* optional helper for eslint-plugin-react */
+        settings: {
+            react: { version: 'detect' },
+        },
+
+        /* ── actual rules ----------------------------------------------------- */
         rules: {
-            ...tseslint.configs.recommendedTypeChecked.rules,
+            /* --- TypeScript ---------------------------------------------------- */
+            'no-unused-vars': 'off',
+            '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+
+            /* --- React --------------------------------------------------------- */
+            'react/jsx-uses-react': 'off',          // not needed with React ≥17
+            'react/react-in-jsx-scope': 'off',      // not needed with React ≥17
+            'react/jsx-uses-vars': 'error',
+            'react/prop-types': 'off',
+            'react-hooks/rules-of-hooks': 'error',
+            'react-hooks/exhaustive-deps': 'warn',
+
+            /* --- Imports / dead code ------------------------------------------ */
+            'unused-imports/no-unused-imports': 'warn',
+
+            /* --- Misc best-practices ------------------------------------------ */
+            eqeqeq: ['error', 'smart'],
+            'no-console': ['warn', { allow: ['warn', 'error'] }],
         },
     },
-
-    /* ── React tweaks ──────────────────────────────────────────────── */
-    {
-        plugins: { react },
-        settings: { react: { version: 'detect' } },
-        rules: {
-            'react/jsx-uses-react': 'off',       // React 17+
-            'react/react-in-jsx-scope': 'off',   // React 17+
-        },
-    },
-
-    /* ── Config / build files – parsed as untyped JS/TS ───────────── */
-    {
-        files: [
-            '**/*.config.{js,ts,mjs,cjs}', // vite.config.ts, tsup.config.ts, etc.
-            'vitest.config.ts',
-            'tailwind.config.js',
-            'eslint.config.*',
-        ],
-        languageOptions: {
-            parserOptions: { project: null }, // ⬅ disable typed-linting
-        },
-    },
-
-    /* ── Prettier (always last) ───────────────────────────────────── */
-    prettier,
 ];

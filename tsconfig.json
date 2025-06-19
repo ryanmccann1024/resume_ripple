@@ -11,9 +11,11 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true, // <-- we *do* want d.ts
     "declarationMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true
   },
 
-  "include": ["packages/**/*", "apps/**/*"],
+  "include": ["apps/*/src", "packages/*/src", "apps/*/test", "packages/*/test"],
   "exclude": ["**/dist", "node_modules"]
 }
