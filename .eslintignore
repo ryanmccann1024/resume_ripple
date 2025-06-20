@@ -6,3 +6,9 @@ packages/*/dist
 # misc
 node_modules
 .husky
+
+# Project-level build / style configs (skip type-aware rules)
+**/postcss.config.js
+**/tailwind.config.js
+**/vite.config.ts
+husky-test.js

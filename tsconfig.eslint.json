@@ -1,7 +1,3 @@
-// tsconfig.eslint.json
-// 🧹 TypeScript config used specifically by ESLint for type-aware linting.
-// Includes source files from apps and packages to ensure all important code is analyzed.
-
 {
   "extends": "./tsconfig.json",
   "include": [
@@ -17,7 +13,11 @@
 
     /* root-level configs (Vitest, ESLint, etc.) */
     "*.config.{js,ts,cjs,mjs}",
-    "vitest.config.ts"
+    "vitest.config.ts",
+
+    /* missing app-level config files */
+    "apps/*/*.config.{js,ts}", // for vite.config.ts, tailwind.config.js, postcss.config.js
+    "husky-test.js" // unconventional file, explicitly add
   ],
   "exclude": ["node_modules", "dist", "coverage"]
 }
