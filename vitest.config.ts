@@ -1,7 +1,9 @@
+// 🔧 Vitest config for running fast, type-safe tests on React + TypeScript components.
+// Uses jsdom to simulate a browser-like environment for UI testing.
+
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  // defaults for all projects
   test: {
     globals: true,
     coverage: {
@@ -11,10 +13,8 @@ export default defineConfig({
     },
   },
 
-  // one project per workspace
   projects: [
     {
-      // core-logic ─────────────────────────────────────────
       root: 'packages/core-logic',
       test: {
         name: 'core-logic',
@@ -23,7 +23,6 @@ export default defineConfig({
       },
     },
     {
-      // prompts ────────────────────────────────────────────
       root: 'packages/prompts',
       test: {
         name: 'prompts',
@@ -32,7 +31,6 @@ export default defineConfig({
       },
     },
     {
-      // ui-kit (browser) ───────────────────────────────────
       root: 'packages/ui-kit',
       test: {
         name: 'ui-kit',
@@ -42,7 +40,6 @@ export default defineConfig({
       },
     },
     {
-      // web (browser) ──────────────────────────────────────
       root: 'apps/web',
       test: {
         name: 'web',
