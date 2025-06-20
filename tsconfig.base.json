@@ -1,3 +1,7 @@
+// tsconfig.base.json
+// 🧱 Base TypeScript config shared across all apps and packages in the monorepo.
+// Defines strict typing, modern JS/React support, and compiler behavior.
+
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -10,7 +14,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@core/*": ["packages/core-logic/src/*"],
-      "@ui/*":   ["packages/ui-kit/src/*"]
+      "@ui/*": ["packages/ui-kit/src/*"]
     }
   }
 }

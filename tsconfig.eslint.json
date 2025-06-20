@@ -1,9 +1,15 @@
+// tsconfig.eslint.json
+// 🧹 TypeScript config used specifically by ESLint for type-aware linting.
+// Includes source files from apps and packages to ensure all important code is analyzed.
+
 {
   "extends": "./tsconfig.json",
   "include": [
     /* source code */
     "apps/*/src/**/*",
     "packages/*/src/**/*",
+    "packages/ui-kit/.storybook/**/*",
+    "tsup.config.ts",
 
     /* tests */
     "apps/*/test/**/*",

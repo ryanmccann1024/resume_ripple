@@ -1,3 +1,7 @@
+// tsconfig.json
+// 🧠 Root TypeScript config for the entire monorepo.
+// Extends base config and enables project references, paths, and aliases for apps/packages.
+
 {
   // tsconfig.json ─ satisfies ESLint, nothing else
   "compilerOptions": {
