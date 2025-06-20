@@ -8,46 +8,46 @@ import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
 export default [
-    /* -------------------------------------------------
-     * 1️⃣  Ignore build / tooling configs altogether
-     * ------------------------------------------------- */
-    {
-        ignores: [
-            '**/postcss.config.js',
-            '**/tailwind.config.js',
-            '**/vite.config.ts',
-            'husky-test.js'
-        ]
+  /* -------------------------------------------------
+   * 1️⃣  Ignore build / tooling configs altogether
+   * ------------------------------------------------- */
+  {
+    ignores: [
+      '**/postcss.config.js',
+      '**/tailwind.config.js',
+      '**/vite.config.ts',
+      'husky-test.js',
+    ],
+  },
+
+  /* -------------------------------------------------
+   * 2️⃣  Base JavaScript rules
+   * ------------------------------------------------- */
+  js.configs.recommended,
+
+  /* -------------------------------------------------
+   * 3️⃣  TypeScript rules (syntax only, no types)
+   * ------------------------------------------------- */
+  ...tseslint.configs.recommended,
+
+  /* -------------------------------------------------
+   * 4️⃣  TypeScript rules WITH type-checking
+   * ------------------------------------------------- */
+  ...tseslint.configs.recommendedTypeChecked,
+
+  /* -------------------------------------------------
+   * 5️⃣  Apply project awareness only to TS / TSX files
+   * ------------------------------------------------- */
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parserOptions: {
+        project: './tsconfig.eslint.json',
+      },
     },
-
-    /* -------------------------------------------------
-     * 2️⃣  Base JavaScript rules
-     * ------------------------------------------------- */
-    js.configs.recommended,
-
-    /* -------------------------------------------------
-     * 3️⃣  TypeScript rules (syntax only, no types)
-     * ------------------------------------------------- */
-    ...tseslint.configs.recommended,
-
-    /* -------------------------------------------------
-     * 4️⃣  TypeScript rules WITH type-checking
-     * ------------------------------------------------- */
-    ...tseslint.configs.recommendedTypeChecked,
-
-    /* -------------------------------------------------
-     * 5️⃣  Apply project awareness only to TS / TSX files
-     * ------------------------------------------------- */
-    {
-        files: ['**/*.ts', '**/*.tsx'],
-        languageOptions: {
-            parserOptions: {
-                project: './tsconfig.eslint.json'
-            }
-        },
-        rules: {
-            '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-            '@typescript-eslint/explicit-function-return-type': 'off'
-        }
-    }
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
+  },
 ];
